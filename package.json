@@ -1,0 +1,26 @@
+{
+  "name": "poppy",
+  "version": "0.0.1",
+  "description": "An powerful bot form Discord with too many features.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "author": "DanielaGC",
+  "license": "MIT",
+  "dependencies": {
+    "@lavacord/eris": "0.0.3",
+    "axios": "^0.21.1",
+    "chalk": "^4.1.0",
+    "chariot.js": "^3.4.1",
+    "eris": "^0.14.0",
+    "eris-collector": "^1.0.1",
+    "i18next": "^19.9.0",
+    "i18next-node-fs-backend": "^2.1.3",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.18"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
