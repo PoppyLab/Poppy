@@ -9,11 +9,9 @@
   "author": "DanielaGC",
   "license": "MIT",
   "dependencies": {
-    "@lavacord/eris": "0.0.3",
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
-    "chariot.js": "^3.4.1",
-    "eris": "^0.14.0",
+    "eris": "github:abalabahaha/eris#dev",
     "eris-collector": "^1.0.1",
     "i18next": "^19.9.0",
     "i18next-node-fs-backend": "^2.1.3",

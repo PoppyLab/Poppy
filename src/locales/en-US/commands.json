@@ -1,0 +1,5 @@
+{
+  "ping": {
+    "shards": "I have {{0}} shards."
+  }
+}
