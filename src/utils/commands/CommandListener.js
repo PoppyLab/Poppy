@@ -4,11 +4,11 @@ module.exports = class CommandListener {
       name: config.name,
       aliases: config.aliases || [],
       permissions: {
-        user: [],
-        bot: []
+        user: config.permissions.user || [],
+        bot: config.permissions.bot || []
       },
-      guild: false,
-      developer: false
+      guild: config.guild || false,
+      developer: config.developer || false
     }
   }
 }
