@@ -1,4 +1,5 @@
 const Emoji = require('../emojis/Emojis')
+const UserTools = require('../UserTools')
 module.exports = class CommandContext {
   constructor(client, msg, args, locale, database) {
     this.client = client
@@ -6,6 +7,8 @@ module.exports = class CommandContext {
     this.args = args
     this.locale = locale
     this.database = database
+    this.member = new UserTools(this.msg.member)
+
   }
 
   reply(emoji, content, ...opt) {
