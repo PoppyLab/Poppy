@@ -1,10 +1,6 @@
 const BadgesTools = require("./BadgesTools")
 const PermissionsTools = require("./Permissions")
 
-
-
-
-
 module.exports = class UserTools {
     constructor(user) {
         this.user = user.user

@@ -7,8 +7,6 @@ module.exports = {
     admin: '#ff602b'
   },
   options: {
-    getAllUsers: true,
-    disableMentions: 'everyone',
     maxShards: isNaN(process.env.MAX_SHARDS) ? process.env.MAX_SHARDS : Number(process.env.MAX_SHARDS),
     restMode: true,
     allowedMentions: {
@@ -19,7 +17,6 @@ module.exports = {
     },
     intents: [
       'guilds',
-      'guildMembers',
       'guildBans',
       'guildEmojis',
       'guildMessages',

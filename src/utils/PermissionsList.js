@@ -1,5 +1,3 @@
-
-
 module.exports = {
     createInvite: {
         name: "Create Instant Invite",
