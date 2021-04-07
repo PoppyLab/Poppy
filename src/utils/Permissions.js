@@ -10,7 +10,7 @@ module.exports = class PermissionsTools {
 
         this.permissionsAllow = []
         this.permissionsAllowMissing = []
-
+        
         this.permissionsDeny = []
         this.permissionsDenyMissing = []
 
