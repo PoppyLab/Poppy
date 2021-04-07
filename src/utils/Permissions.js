@@ -1,4 +1,3 @@
-
 const list = require("./PermissionsList")
 
 module.exports = class PermissionsTools {
