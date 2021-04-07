@@ -78,28 +78,29 @@ module.exports = class PermissionsTools {
 
     permissionsInfo() {
         
-        const permissionsAllow = []
-        const permissionsAllowMissing = []
+        const permissionsAllow = new Map()
+        const permissionsAllowMissing = new Map()
 
-        const permissionsDeny = []
-        const permissionsDenyMissing = []
+        const permissionsDeny = new Map()
+        const permissionsDenyMissing = new Map()
 
 
         for (let permission in list) {
             switch((BigInt(list[permission].bits) & this.allow) === BigInt(list[permission].bits)) {
                 case true:
-                    permissionsAllow.push(list[permission].tag)
+                   
+                    permissionsAllow.set(permission, list[permission])
                 break;
                 case false:
-                    permissionsAllowMissing.push(list[permission].tag)
+                    permissionsAllowMissing.set(permission, list[permission])
                 break;
             }
             switch((BigInt(list[permission].bits) & this.deny) === BigInt(list[permission].bits)) {
                 case true:
-                    permissionsDeny.push(list[permission].tag)
+                    permissionsDeny.set(permission, list[permission])
                 break;
                 case false:
-                    permissionsDenyMissing.push(list[permission].tag)
+                    permissionsDenyMissing.set(permission, list[permission])
                 break;
             }
         }
