@@ -12,10 +12,35 @@ module.exports = class CommandContext {
   }
 
   reply(emoji, content, ...opt) {
-    this.msg.channel.createMessage({ content: `${Emoji.get(emoji).mention} **|** ${this.msg.author.mention} ${content}`, messageReferenceID: this.msg.id }, opt.options, opt.files)
+    return this.msg.channel.createMessage({ content: `${Emoji.get(emoji).mention} **|** ${this.msg.author.mention} ${content}`, messageReferenceID: this.msg.id }, opt.options, opt.files)
   }
 
   replyT(emoji, content, ...opt) {
-    this.msg.channel.createMessage({ content: `${Emoji.get(emoji).mention} **|** ${this.msg.author.mention} ${this.locale(content, opt.data)}`, messageReferenceID: this.msg.id }, opt.options, opt.files)
+    return this.msg.channel.createMessage({ content: `${Emoji.get(emoji).mention} **|** ${this.msg.author.mention} ${this.locale(content, opt.data)}`, messageReferenceID: this.msg.id }, opt.options, opt.files)
+  }
+
+  send(content, ...opt) {
+    if (typeof content === 'object') {
+      return this.msg.channel.createMessage(Object.assign(content, { messageReferenceID: this.msg.id }), opt.options, opt.files)
+    }
+
+    return this.msg.createMessage(Object.assign({ content }, { messageReferenceID: this.msg.id }), opt.options, opt.files)
+  }
+
+  async getUser(member, getAuthor = false) {
+    if (!member) return false
+    if (!member && getAuthor) {
+      return this.msg.author
+    }
+
+    try {
+      const user = await this.client.getRESTUser(member.replace(/[<@!>]/g, ''))
+      return user
+    } catch {
+      const guild_member = this.msg.channel.guild.members.find(user => user.user.username.toLowerCase().includes(member.toLowerCase()))
+      if (!guild_member) return false
+
+      return guild_member.user
+    }
   }
 }
