@@ -2,6 +2,7 @@ const { dev } = require('../../../config')
 const i18next = require('i18next')
 const PermissionsTools = require('../Permissions')
 const CommandContext = require('./CommandContext')
+const PermissionsList = require('../PermissionsList')
 
 module.exports = class CommandRunner {
   constructor(client, msg) {
@@ -39,27 +40,39 @@ module.exports = class CommandRunner {
     if (command.config.developer && !dev.includes(this.msg.author.id)) return
     this.msg.channel.sendTyping()
     
-      for (let permission of command.config.permissions.user) {
-        let permissionCheck = new PermissionsTools(ctx.msg.member.permissions)
-        let positionPermision = permissionCheck.permissionsAllow.indexOf(permission.tag)
-        if (permissionCheck.permissionsAllow[positionPermision] === undefined) {
-          ctx.reply('ping_pong', `You don't have permission \`${permission.tag}\` to run this command!`)
-          return
-        }
+    for (let permission of command.config.permissions.user) {   
+      let permissionSelect = PermissionsList[permission]
+      if (typeof permissionSelect === 'object') {
+          let permissionCheck = new PermissionsTools(ctx.msg.member.permissions)
+          let positionPermision = permissionCheck.permissionsAllow.indexOf(permissionSelect.tag)
+          if (permissionCheck.permissionsAllow[positionPermision] === undefined) {
+            ctx.reply('ping_pong', `You don't have permission \`${permissionSelect.tag}\` to run this command!`)
+            return
+          }
+      } else {
+          ctx.reply('ping_pong', `Sorry there are unrecognized permissions and therefore the command cannot be executed for security reasons.`)
+          return 
       }
+    }
 
     if (command.config.permissions.bot.size >= 0) {
+
     } else {
       const getBot = this.msg.channel.guild.members.get(ctx.client.user.id)
-      for (let permission of command.config.permissions.bot) {
-        let permissionCheck = new PermissionsTools(getBot.permissions)
-        let positionPermision = permissionCheck.permissionsAllow.indexOf(permission.tag)
-        if (permissionCheck.permissionsAllow[positionPermision] === undefined) {
-          ctx.reply('ping_pong', `I do not have permission that \`${permission.tag}\` for this command!`)
-          return
+      for (let permission of command.config.permissions.bot) {   
+        let permissionSelect = PermissionsList[permission]
+        if (typeof permissionSelect === 'object') {
+          let permissionCheck = new PermissionsTools(getBot.permissions)
+          let positionPermision = permissionCheck.permissionsAllow.indexOf(permissionSelect.tag)
+          if (permissionCheck.permissionsAllow[positionPermision] === undefined) {
+            ctx.reply('ping_pong', `I do not have permission that \`${permissionSelect.tag}\` for this command!`)
+            return
+          }
+        } else {
+          ctx.reply('ping_pong', `Sorry there are unrecognized permissions and therefore the command cannot be executed for security reasons.`)
+          return 
         }
       }
-
     }
 
     command.run(ctx)
