@@ -1,70 +1,70 @@
 module.exports = {
-    CREATE_INSTANT_INVITE: {
+    createInvite: {
         name: "Create Instant Invite",
-        tag: "CREATE_INSTANT_INVITE",
+        tag: "createInvite",
         int: 0,
         to: 0,
         bits: 1 << 0,
         isGuild: true,
         isPrivate: false
     },
-    KICK_MEMBERS: {
+    kickMember: {
         name: "Kick Members",
-        tag: "KICK_MEMBERS",
+        tag: "kickMember",
         int: 0,
         to: 0,
         bits: 1 << 1,
         isGuild: true,
         isPrivate: false
     },
-    BAN_MEMBERS: {
+    banMember: {
         name: "Ban Members",
-        tag: "BAN_MEMBERS",
+        tag: "banMember",
         int: 0,
         to: 0,
         bits: 1 << 2,
         isGuild: true,
         isPrivate: false
     },
-    ADMINISTRATOR: {
+    administrator: {
         name: "Administrator",
-        tag: "ADMINISTRATOR",
+        tag: "administrator",
         int: 0,
         to: 0,
         bits: 1 << 3,
         isGuild: true,
         isPrivate: false
     },
-    MANAGE_CHANNEL: {
+    manageChannel: {
         name: "Manage Channels",
-        tag: "MANAGE_CHANNEL",
+        tag: "manageChannel",
         int: 0,
         to: 0,
         bits: 1 << 4,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_ADD_REACTION: {
+    messageAddReaction: {
         name: "Add Reactions",
-        tag: "MESSAGE_ADD_REACTION",
+        tag: "messageAddReaction",
         int: 0,
         to: 0,
         bits: 1 << 6,
         isGuild: true,
         isPrivate: false
     },
-    VIEW_AUDIT_LOGS: {
+    auditLogs: {
         name: "View Audit Logs",
-        tag: "VIEW_AUDIT_LOGS",
+        tag: "auditLogs",
         int: 0,
         to: 0,
         bits: 1 << 7,
         isGuild: true,
         isPrivate: false
     },
-    VIEW_GUILD_INSIGHTS: {
+    guildInsights: {
         name: "View Server Insights",
-        tag: "VIEW_GUILD_INSIGHTS",
+        tag: "guildInsights",
         int: 0,
         to: 0,
         bits: 1 << 19,
@@ -72,9 +72,9 @@ module.exports = {
         isPrivate: false
     },
 
-    PRIORITY_SPEAKER: {
+    prioritySpeaker: {
         name: "Priority",
-        tag: "PRIORITY_SPEAKER",
+        tag: "prioritySpeaker",
         int: 0,
         to: 0,
         bits: 1 << 8,
@@ -82,9 +82,9 @@ module.exports = {
         isPrivate: false
     },
 
-    MANAGE_SERVER: {
+    manageGuild: {
         name: "GuildManager",
-        tag: "VIEW_GUILD_INSIGHTS",
+        tag: "manageGuild",
         int: 0,
         to: 0,
         bits: 1 << 5,
@@ -97,9 +97,9 @@ module.exports = {
     /**
      * This is applicable for all types of channels.
      */
-    VIEW_CHANNEL: {
+    viewChannel: {
         name: "Read channel text and view Voice Channels",
-        tag: "VIEW_CHANNEL",
+        tag: "viewChannel",
         int: 0,
         to: 0,
         bits: 1 << 10,
@@ -110,90 +110,90 @@ module.exports = {
     /**
      * Permissions of Text
      */
-    MESSAGE_READ: {
+    readMessageHistory: {
         name: "Read Messages",
-        tag: "MESSAGE_READ",
+        tag: "readMessageHistory",
         int: 0,
         to: 0,
         bits: 1 << 10,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_WRITE: {
+    messageWrite: {
         name: "Send Messages",
-        tag: "MESSAGE_WRITE",
+        tag: "messageWrite",
         int: 0,
         to: 0,
         bits: 1 << 11,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_TTS: {
+    messageTTS: {
         name: "Send TTS Messages",
-        tag: "MESSAGE_TTS",
+        tag: "messageTTS",
         int: 0,
         to: 0,
         bits: 1 << 12,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_MANAGE: {
+    manageMessages: {
         name: "Manage Messages",
-        tag: "MESSAGE_MANAGE",
+        tag: "manageMessages",
         int: 0,
         to: 0,
         bits: 1 << 13,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_EMBED_LINKS: {
+    embedLinks: {
         name: "Embed Links",
-        tag: "MESSAGE_EMBED_LINKS",
+        tag: "embedLinks",
         int: 0,
         to: 0,
         bits: 1 << 14,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_ATTACH_FILES: {
+    attachFiles: {
         name: "Attach Files",
-        tag: "MESSAGE_ATTACH_FILES",
+        tag: "attachFiles",
         int: 0,
         to: 0,
         bits: 1 << 15,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_HISTORY: {
+    messageHistory: {
         name: "Read History",
-        tag: "MESSAGE_HISTORY",
+        tag: "messageHistory",
         int: 0,
         to: 0,
         bits: 1 << 16,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_MENTION_EVERYONE: {
+    mentionEveryone: {
         name: "Mention Everyone",
-        tag: "MESSAGE_MENTION_EVERYONE",
+        tag: "mentionEveryone",
         int: 0,
         to: 0,
         bits: 1 << 17,
         isGuild: true,
         isPrivate: false
     },
-    MESSAGE_EXT_EMOJI: {
+    externalEmojis: {
         name: "Use External Emojis",
-        tag: "MESSAGE_EXT_EMOJI",
+        tag: "externalEmojis",
         int: 0,
         to: 0,
         bits: 1 << 18,
         isGuild: true,
         isPrivate: false
     },
-    USE_SLASH_COMMANDS: {
+    useSlashCommands: {
         name: "Use Slash Commands",
-        tag: "USE_SLASH_COMMANDS",
+        tag: "useSlashCommands",
         int: 0,
         to: 0,
         bits: 1 << 31,
@@ -205,63 +205,63 @@ module.exports = {
     /**
      * Permissions Voice Channel
      */
-    VOICE_STREAM: {
+    voiceStream: {
         name: "Stream",
-        tag: "VOICE_STREAM",
+        tag: "voiceStream",
         int: 0,
         to: 0,
         bits: 1 << 9,
         isGuild: true,
         isPrivate: false
     },
-    VOICE_CONNECT: {
+    voiceConnect: {
         name: "Connect",
-        tag: "VOICE_CONNECT",
+        tag: "voiceConnect",
         int: 0,
         to: 0,
         bits: 1 << 20,
         isGuild: true,
         isPrivate: false
     },
-    VOICE_SPEAK: {
+    voiceSpeak: {
         name: "Speak",
-        tag: "VOICE_SPEAK",
+        tag: "voiceSpeak",
         int: 0,
         to: 0,
         bits: 1 << 21,
         isGuild: true,
         isPrivate: false
     },
-    VOICE_MUTE_OTHERS: {
+    voiceMuteOthers: {
         name: "Mute Members",
-        tag: "VOICE_MUTE_OTHERS",
+        tag: "voiceMuteOthers",
         int: 0,
         to: 0,
         bits: 1 << 22,
         isGuild: true,
         isPrivate: false
     },
-    VOICE_DEAF_OTHERS: {
+    voiceDeaf: {
         name: "Deafen Members",
-        tag: "VOICE_DEAF_OTHERS",
+        tag: "voiceDeafOthers",
         int: 0,
         to: 0,
         bits: 1 << 23,
         isGuild: true,
         isPrivate: false
     },
-    VOICE_MOVE_OTHERS: {
+    voiceMoveOthers: {
         name: "Move Members",
-        tag: "VOICE_MOVE_OTHERS",
+        tag: "voiceMoveOthers",
         int: 0,
         to: 0,
         bits: 1 << 24,
         isGuild: true,
         isPrivate: false
     },
-    VOICE_USE_VAD: {
+    voiceUseVad: {
         name: "Use Voice Activity",
-        tag: "VOICE_USE_VAD",
+        tag: "voiceUseVad",
         int: 0,
         to: 0,
         bits: 1 << 25,
@@ -272,54 +272,54 @@ module.exports = {
     /**
      * Guild
      */
-    NICKNAME_CHANGE: {
+    chanageNickname: {
         name: "Change Nickname",
-        tag: "NICKNAME_CHANGE",
+        tag: "chanageNickname",
         int: 0,
         to: 0,
         bits: 1 << 26,
         isGuild: true,
         isPrivate: false
     },
-    NICKNAME_MANAGE: {
+    manageNickname: {
         name: "Manage Nicknames",
-        tag: "NICKNAME_MANAGE",
+        tag: "manageNickname",
         int: 0,
         to: 0,
         bits: 1 << 27,
         isGuild: true,
         isPrivate: false
     },
-    MANAGE_ROLES: {
+    manageRoles: {
         name: "Manage Roles",
-        tag: "MANAGE_ROLES",
+        tag: "manageRoles",
         int: 0,
         to: 0,
         bits: 1 << 28,
         isGuild: true,
         isPrivate: false
     },
-    MANAGE_PERMISSIONS: {
+    managePermissions: {
         name: "Manage Permissions",
-        tag: "MANAGE_PERMISSIONS",
+        tag: "managePermissions",
         int: 0,
         to: 0,
         bits: 1 << 28,
         isGuild: true,
         isPrivate: false
     },
-    MANAGE_WEBHOOKS: {
+    manageWebhooks: {
         name: "Manage Webhooks",
-        tag: "MANAGE_WEBHOOKS",
+        tag: "manageWebhooks",
         int: 0,
         to: 0,
         bits: 1 << 29,
         isGuild: true,
         isPrivate: false
     },
-    MANAGE_EMOTES: {
+    manageEmotes: {
         name: "Manage Emojis",
-        tag: "MANAGE_EMOTES",
+        tag: "manageEmotes",
         int: 0,
         to: 0,
         bits: 1 << 30,
