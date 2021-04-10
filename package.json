@@ -1,10 +1,14 @@
 {
   "name": "poppy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An powerful bot form Discord with too many features.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon ."
+  },
+  "engines": {
+    "node": "=>14.0.0",
+    "npm": "=>6.0.0"
   },
   "author": "DanielaGC",
   "license": "MIT",
