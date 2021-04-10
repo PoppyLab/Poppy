@@ -3,5 +3,6 @@ module.exports = {
   CommandRunner: require('./commands/CommandRunner'),
   Database: require('./database/Database'),
   Emoji: require('./emojis/Emojis'),
-  LocaleLoader: require('./LocaleLoader')
+  LocaleLoader: require('./LocaleLoader'),
+  Logger: require('./Logger')
 }
