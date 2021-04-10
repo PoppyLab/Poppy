@@ -3,6 +3,8 @@ const i18next = require('i18next')
 const PermissionsTools = require('../Permissions')
 const CommandContext = require('./CommandContext')
 const PermissionsList = require('../PermissionsList')
+const cooldown = new Map()
+const LocaleLoader = require('../LocaleLoader')
 
 module.exports = class CommandRunner {
   constructor(client, msg) {
@@ -36,22 +38,41 @@ module.exports = class CommandRunner {
     const command = this.client.commands.get(commandName) || this.client.commands.get(this.client.aliases.get(commandName))
     if (!command) return
 
-    const ctx = new CommandContext(this.client, this.msg, locale, { user: userData, guild: guildData, global: this.client.database })
+    const ctx = new CommandContext(this.client, this.msg, args, locale, { user: userData, guild: guildData, global: this.client.database })
     if (command.config.developer && !dev.includes(this.msg.author.id)) return
     this.msg.channel.sendTyping()
-    
-    for (let permission of command.config.permissions.user) {   
+    const getCooldown = cooldown.get(this.msg.author.id)
+    if (!getCooldown) {
+      cooldown.set(this.msg.author.id, [{
+        name: command.config.name,
+        author: this.msg.author.id,
+        time: Date.now() + command.config.cooldown * 1000
+      }])
+    } else {
+      setTimeout(() => {
+        cooldown.delete(this.msg.author.id)
+      }, getCooldown.time)
+      const cmds = getCooldown.filter(cmd => cmd.author === this.msg.author.id)
+      if (cmds.find(cmd => cmd.name === command.config.name)) return ctx.replyT('error', 'basic:cooldown', {
+        data:
+        {
+          0: new Date(new Date(cmds.find(cmd => cmd.name === command.config.name).time).getTime() - Date.now()).getSeconds()
+        }
+      })
+    }
+
+    for (let permission of command.config.permissions.user) {
       let permissionSelect = PermissionsList[permission]
       if (typeof permissionSelect === 'object') {
-          let permissionCheck = new PermissionsTools(ctx.msg.member.permissions)
-          let positionPermision = permissionCheck.permissionsAllow.indexOf(permissionSelect.tag)
-          if (permissionCheck.permissionsAllow[positionPermision] === undefined) {
-            ctx.reply('ping_pong', `You don't have permission \`${permissionSelect.tag}\` to run this command!`)
-            return
-          }
+        let permissionCheck = new PermissionsTools(ctx.msg.member.permissions)
+        let positionPermision = permissionCheck.permissionsAllow.indexOf(permissionSelect.tag)
+        if (permissionCheck.permissionsAllow[positionPermision] === undefined) {
+          ctx.reply('ping_pong', `You don't have permission \`${permissionSelect.tag}\` to run this command!`)
+          return
+        }
       } else {
-          ctx.reply('ping_pong', `Sorry there are unrecognized permissions and therefore the command cannot be executed for security reasons.`)
-          return 
+        ctx.reply('ping_pong', `Sorry there are unrecognized permissions and therefore the command cannot be executed for security reasons.`)
+        return
       }
     }
 
@@ -59,7 +80,7 @@ module.exports = class CommandRunner {
 
     } else {
       const getBot = this.msg.channel.guild.members.get(ctx.client.user.id)
-      for (let permission of command.config.permissions.bot) {   
+      for (let permission of command.config.permissions.bot) {
         let permissionSelect = PermissionsList[permission]
         if (typeof permissionSelect === 'object') {
           let permissionCheck = new PermissionsTools(getBot.permissions)
@@ -70,7 +91,7 @@ module.exports = class CommandRunner {
           }
         } else {
           ctx.reply('ping_pong', `Sorry there are unrecognized permissions and therefore the command cannot be executed for security reasons.`)
-          return 
+          return
         }
       }
     }
