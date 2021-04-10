@@ -5,7 +5,7 @@ const Users = new Schema({
   blacklist: { type: Object, default: { banned: false, reason: '' } },
   rep: { type: Object, default: { count: 0, cooldown: 0, reason: '' } },
   profile: { type: Object, default: { type: '', color: '#cd8cff', background: '' } },
-  lollicoins: { type: Object, default: { count, cooldown, transations: [] } },
+  lollicoins: { type: Object, default: { count: 0, cooldown: 0, transations: [] } },
   vip: { type: Object, default: { type: 'normal', time: 0 } }
 })
 const User = model('Users', Users)
