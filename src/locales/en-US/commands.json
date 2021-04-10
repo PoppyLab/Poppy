@@ -1,5 +1,6 @@
 {
   "ping": {
+    "description": "Show my latency to you.",
     "shards": "I have {{0}} shards."
   }
 }
