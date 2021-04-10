@@ -2,9 +2,9 @@ require('dotenv').config()
 module.exports = {
   dev: ['395788326835322882'],
   colors: {
-    default: '#cd9cff',
-    error: '#d93030',
-    admin: '#ff602b'
+    default: 0xCD9CFF,
+    error: 0xD93030,
+    admin: 0xFF602B
   },
   options: {
     maxShards: isNaN(process.env.MAX_SHARDS) ? process.env.MAX_SHARDS : Number(process.env.MAX_SHARDS),
