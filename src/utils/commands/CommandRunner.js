@@ -48,12 +48,14 @@ module.exports = class CommandRunner {
         author: this.msg.author.id,
         time: Date.now() + command.config.cooldown * 1000
       }])
+      if (getCooldown) {
+        const cmds = getCooldown.filter(cmd => cmd.author === this.msg.author.id)
+        setTimeout(() => {
+          cooldown.delete(this.msg.author.id)
+        }, new Date(new Date(cmds.find(cmd => cmd.name === command.config.name).time).getTime() - Date.now()).getTime())
+      }
     } else {
       const cmds = getCooldown.filter(cmd => cmd.author === this.msg.author.id)
-      setTimeout(() => {
-        cooldown.delete(this.msg.author.id)
-      }, new Date(new Date(cmds.find(cmd => cmd.name === command.config.name).time).getTime() - Date.now()).getTime())
-
       if (cmds.find(cmd => cmd.name === command.config.name)) {
         return ctx.replyT('poppy_rip', 'basic:cooldown', {
           data: { 0: new Date(new Date(cmds.find(cmd => cmd.name === command.config.name).time).getTime() - Date.now()).getSeconds() }
