@@ -1,3 +1,8 @@
 {
-  "cooldown": "Calm down little bear, you have to wait `{{0}}` seconds before execute another command."
+  "cooldown": "Calm down little bear, you have to wait `{{0}}` seconds before execute another command.",
+  "permissions": {
+    "user": "You don't have permission `{{0}}` to run this command!",
+    "bot": "I do not have permission that `{{0}}` for this command!",
+    "unknown": "Sorry there are unrecognized permissions and therefore the command cannot be executed for security reasons."
+  }
 }
