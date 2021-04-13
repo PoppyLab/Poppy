@@ -2,6 +2,7 @@ module.exports = {
   CommandListener: require('./commands/CommandListener'),
   CommandRunner: require('./commands/CommandRunner'),
   Database: require('./database/Database'),
+  EmbedBuilder: require('./EmbedBuilder'),
   Emoji: require('./emojis/Emojis'),
   LocaleLoader: require('./LocaleLoader'),
   Logger: require('./Logger')
