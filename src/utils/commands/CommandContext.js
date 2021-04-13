@@ -12,19 +12,19 @@ module.exports = class CommandContext {
   }
 
   reply(emoji, content, ...opt) {
-    return this.msg.channel.createMessage({ content: `${Emoji.get(emoji).mention} **|** ${this.msg.author.mention} ${content}`, messageReferenceID: this.msg.id }, opt[0].options, opt[0].files)
+    return this.msg.channel.createMessage({ content: `${Emoji.get(emoji).mention} **|** ${this.msg.author.mention} ${content}`, messageReferenceID: this.msg.id }, opt[0]?.options, opt[0]?.files)
   }
 
   replyT(emoji, content, ...opt) {
-    return this.msg.channel.createMessage({ content: `${Emoji.get(emoji).mention} **|** ${this.msg.author.mention} ${this.locale(content, opt[0].data)}`, messageReferenceID: this.msg.id }, opt[0].options, opt[0].files)
+    return this.msg.channel.createMessage({ content: `${Emoji.get(emoji).mention} **|** ${this.msg.author.mention} ${this.locale(content, opt[0]?.data)}`, messageReferenceID: this.msg.id }, opt[0]?.options, opt[0]?.files)
   }
 
   send(content, ...opt) {
     if (typeof content === 'object') {
-      return this.msg.channel.createMessage(Object.assign(content, { messageReferenceID: this.msg.id }), opt[0].options, opt[0].files)
+      return this.msg.channel.createMessage(Object.assign(content, { messageReferenceID: this.msg.id }), opt[0]?.options, opt[0]?.files)
     }
 
-    return this.msg.createMessage(Object.assign({ content }, { messageReferenceID: this.msg.id }), opt[0].options, opt[0].files)
+    return this.msg.createMessage(Object.assign({ content }, { messageReferenceID: this.msg.id }), opt[0]?.options, opt[0]?.files)
   }
 
   async getUser(member, getAuthor = false) {
