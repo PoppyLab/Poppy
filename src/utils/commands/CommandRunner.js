@@ -4,7 +4,7 @@ const PermissionsTools = require('../Permissions')
 const CommandContext = require('./CommandContext')
 const PermissionsList = require('../PermissionsList')
 const cooldown = new Map()
-const LocaleLoader = require('../LocaleLoader')
+const Emoji = require('../emojis/Emojis')
 
 module.exports = class CommandRunner {
   constructor(client, msg) {
@@ -31,6 +31,11 @@ module.exports = class CommandRunner {
 
     const language = (guildData && guildData.lang) || 'en-US'
     setFixedT(i18next.getFixedT(language))
+
+    if (this.msg.content.replace('!', '') === `<@${this.client.user.id}>`) {
+      return this.msg.channel.createMessage(`${Emoji.get('poppy_proud').mention} **|** ${this.msg.author.mention} ${locale('basic:onMention', { 0: guildData.prefix, 1: process.env.GLOBAL_PREFIX })}`)
+    }
+
     const regexp = new RegExp(`^(${guildData.prefix?.replace(/[-[\]{}()*+?.,\\{ $|#\a]/g, '\\$&')}|${process.env.GLOBAL_PREFIX}|<@!?${this.client.user.id}>( )*)`, 'gi')
     if (!this.msg.content.match(regexp)) return
     const args = this.msg.content.replace(regexp, '').trim().split(/ /g)
@@ -46,14 +51,8 @@ module.exports = class CommandRunner {
       cooldown.set(this.msg.author.id, [{
         name: command.config.name,
         author: this.msg.author.id,
-        time: Date.now() + command.config.cooldown * 1000
+        time: command.config.cooldown * 1000 + Date.now()
       }])
-      if (getCooldown) {
-        const cmds = getCooldown.filter(cmd => cmd.author === this.msg.author.id)
-        setTimeout(() => {
-          cooldown.delete(this.msg.author.id)
-        }, new Date(new Date(cmds.find(cmd => cmd.name === command.config.name).time).getTime() - Date.now()).getTime())
-      }
     } else {
       const cmds = getCooldown.filter(cmd => cmd.author === this.msg.author.id)
       if (cmds.find(cmd => cmd.name === command.config.name)) {
@@ -62,7 +61,11 @@ module.exports = class CommandRunner {
         })
       }
     }
-
+    if (getCooldown) {
+      setTimeout(() => {
+        cooldown.delete(this.msg.author.id)
+      }, command.config.cooldown * 1000)
+    }
     for (let permission of command.config.permissions.user) {
       let permissionSelect = PermissionsList[permission]
       if (typeof permissionSelect === 'object') {
