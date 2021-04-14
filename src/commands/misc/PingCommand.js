@@ -26,9 +26,8 @@ module.exports = class PingCommand extends CommandListener {
       }
         break;
       default: {
-        ctx.reply('ping_pong', `**Pong!** \`${ctx.msg.channel.guild.shard.latency}ms\` (${Emoji.get('world').mention} Shard: ${ctx.msg.channel.guild.shard.id}/${ctx.client.shards.size})`)
+        ctx.reply('ping_pong', `**Pong!** \`${ctx.msg.channel.guild.shard.latency}ms\` (${Emoji.get('satellite').mention} Shard: ${ctx.msg.channel.guild.shard.id}/${ctx.client.shards.size})`)
       }
     }
-
   }
 }
