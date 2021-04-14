@@ -10,6 +10,8 @@ module.exports = class LocaleLoader {
   }
 
   load() {
+    const { Logger } = require('./')
+    const log = new Logger(true, false)
     try {
       i18next.use(translationBackend).init({
         ns: this.ns,
@@ -24,9 +26,9 @@ module.exports = class LocaleLoader {
         returnEmptyString: false
       })
 
-      console.log('Successfully loaded all locales.')
+      log.success('Successfully loaded all locales.')
     } catch {
-      console.log('Oh gosh, an error occurred on load locales.')
+      log.error('Oh gosh, an error occurred on load locales.')
     }
   }
 }

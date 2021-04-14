@@ -1,9 +1,6 @@
 const chalk = require('chalk')
 const moment = require('moment')
 
-
-
-
 module.exports = class Logger {
     constructor(timeShow, levelShow) {
         this.loggers = []
