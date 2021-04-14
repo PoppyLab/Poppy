@@ -4,5 +4,6 @@
     "user": "You don't have permission `{{0}}` to run this command!",
     "bot": "I do not have permission that `{{0}}` for this command!",
     "unknown": "Sorry there are unrecognized permissions and therefore the command cannot be executed for security reasons."
-  }
+  },
+  "onMention": "Howdy! My prefix in this guild is `{{0}}`. But I have a global prefix, and it is `{{1}}`, use `{{0}}help` or `{{1}}help` to know more about my commands."
 }
