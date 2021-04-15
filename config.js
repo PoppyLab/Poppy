@@ -20,6 +20,7 @@ module.exports = {
       'guildBans',
       'guildEmojis',
       'guildMessages',
+      'guildVoiceStates',
       'guildMessageReactions',
       'directMessages',
       'directMessageReactions'
