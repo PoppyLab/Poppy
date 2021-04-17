@@ -46,26 +46,17 @@ module.exports = class CommandRunner {
     const ctx = new CommandContext(this.client, this.msg, args, locale, { user: userData, guild: guildData, global: this.client.database })
     if (command.config.developer && !dev.includes(this.msg.author.id)) return
     this.msg.channel.sendTyping()
-   /* const getCooldown = cooldown.get(this.msg.author.id)
-    if (!getCooldown) {
-      cooldown.set(this.msg.author.id, [{
-        name: command.config.name,
-        author: this.msg.author.id,
-        time: command.config.cooldown * 1000 + Date.now()
-      }])
+
+    
+    if (this.client.commandCooldown.users.get(this.msg.author.id) === undefined) {
+      this.client.commandCooldown.addUser(this.msg.author.id, command.config.cooldown * 1000)
     } else {
-      const cmds = getCooldown.filter(cmd => cmd.author === this.msg.author.id)
-      if (cmds.find(cmd => cmd.name === command.config.name)) {
-        return ctx.replyT('poppy_rip', 'basic:cooldown', {
-          data: { 0: new Date(new Date(cmds.find(cmd => cmd.name === command.config.name).time).getTime() - Date.now()).getSeconds() }
-        })
-      }
+      return ctx.replyT('poppy_rip', 'basic:cooldown', {
+        data: { 0: new Date(new Date(this.client.commandCooldown.users.get(this.msg.author.id).timeSet - Date.now())).getSeconds() }
+      })
+  
     }
-    if (getCooldown) {
-      setTimeout(() => {
-        cooldown.delete(this.msg.author.id)
-      }, command.config.cooldown * 1000)
-    }*/
+  
     for (let permission of command.config.permissions.user) {
       let permissionSelect = PermissionsList[permission]
       if (typeof permissionSelect === 'object') {
