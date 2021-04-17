@@ -38,7 +38,7 @@ module.exports = class CommandRunner {
 
     const regexp = new RegExp(`^(${guildData.prefix?.replace(/[-[\]{}()*+?.,\\{ $|#\a]/g, '\\$&')}|${process.env.GLOBAL_PREFIX}|<@!?${this.client.user.id}>( )*)`, 'gi')
     if (!this.msg.content.match(regexp)) return
-    const args = this.msg.content.replace(regexp, '').trim().split(/ /g)
+    const args = this.msg.content.replace(regexp, '').trim().split(/ +/g)
     const commandName = args.shift().toLowerCase()
     const command = this.client.commands.get(commandName) || this.client.commands.get(this.client.aliases.get(commandName))
     if (!command) return
@@ -46,7 +46,7 @@ module.exports = class CommandRunner {
     const ctx = new CommandContext(this.client, this.msg, args, locale, { user: userData, guild: guildData, global: this.client.database })
     if (command.config.developer && !dev.includes(this.msg.author.id)) return
     this.msg.channel.sendTyping()
-    const getCooldown = cooldown.get(this.msg.author.id)
+   /* const getCooldown = cooldown.get(this.msg.author.id)
     if (!getCooldown) {
       cooldown.set(this.msg.author.id, [{
         name: command.config.name,
@@ -65,7 +65,7 @@ module.exports = class CommandRunner {
       setTimeout(() => {
         cooldown.delete(this.msg.author.id)
       }, command.config.cooldown * 1000)
-    }
+    }*/
     for (let permission of command.config.permissions.user) {
       let permissionSelect = PermissionsList[permission]
       if (typeof permissionSelect === 'object') {

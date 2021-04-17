@@ -2,5 +2,21 @@
   "ping": {
     "description": "Show my latency to you.",
     "shards": "I have {{0}} shards."
+  },
+  "play": {
+    "description": "Make me play a song of YouTube.",
+    "nowPlaying": "Yeah! I'm now playing `{{0}}`. Have a nice music!",
+    "argsNotFound": "You need put a name song or a YouTube URL.",
+    "addedToQueue": "Sure! I adding `{{0}}` to queue. Just wait a moment."
+  },
+  "volume": {
+    "description": "Changes the volume of the player.",
+    "successfully": "Okay... Wait a moment, I'm changing the volume to `{{0}}`.",
+    "minimalVol": "Whoa sweet. The minimal volume is limited to `5`.",
+    "maxVol": "Stop right there! You'll stay deaf if I put more than `150`.",
+    "argsNotFound": "You need put a value, then so I will change the volume for you, sweet."
+  },
+  "stop": {
+    "stoped": "Ok sweet. I'm leaving from the voice channel"
   }
 }

@@ -1,5 +1,4 @@
 const { EventEmitter } = require('events')
-
 module.exports = class LavalinkPlayer extends EventEmitter {
   constructor(manager) {
     super()
@@ -34,11 +33,11 @@ module.exports = class LavalinkPlayer extends EventEmitter {
     }
   }
 
-  play(query) {
+  play(query, author) {
     return this.getSongs(this.player.node, `ytsearch:${query}`).then(result => {
       if (!result[0]) return
-      this._addToQueue(result[0])
-      return result[0].info
+      this._addToQueue(result[0], author)
+      return Object.assign(result[0].info, { requestedBy: author })
     })
   }
 
@@ -47,41 +46,80 @@ module.exports = class LavalinkPlayer extends EventEmitter {
       return result
     })
   }
-  
-  skip() {
-    const queue = this.queue.shift()
-    if (!queue) return false
+  async bassboost(type) {
+    if (type === 'normal') type = { band: 0, gain: 0.2 }
+    if (type === 'medium') type = { band: 2, gain: 0.5 }
+    if (type === 'high') type = { band: 4, gain: 1.0 }
+
+    return this.player.equalizer(type)
+  }
+  async skip() {
+    let queue = this.queue.shift()
+    if (!queue) return
     this.player.play(queue.track)
     this.np = queue.info
     this.repeat.track = queue.track
+    return this.np
+  }
+
+  async setVolume(value) {
+    if (value > 150) value = 150
+    this.player.volume(value)
+    return value
+  }
+
+  pause() {
+    return this.player.paused ? this.player.resume() : this.player.pause()
+  }
+
+  async stop(ctx) {
+    await ctx.client.manager.manager.leave(ctx.msg.guildID)
+    ctx.client.player.delete(ctx.msg.guildID)
+    return true
+  }
+
+  repeatMode() {
+    if (this.repeat.enable) {
+      this.repeat.enable = false
+    } else {
+      this.repeat.enable = true
+    }
+  }
+
+  remove(value) {
+    return this.queue.splice(Number(value) - 1, 1)
   }
 
   shuffle() {
     return this.queue.sort(() => Math.random() > 0.5 ? -1 : 1)
   }
 
-  _addToQueue(track) {
-    if (!this.player.playing && !this.player.paused) return this._play(track)
-    return this.queue.push(track)
+  _addToQueue(track, author) {
+    if (!this.player.playing && !this.player.paused) return this._play(Object.assign(track, { requestedBy: author }))
+    return this.queue.push(Object.assign(track, { requestedBy: author }))
   }
 
-  _play(song) {
+  seek(position) {
+    if (!position) position = 0
+    return this.player.seek(position)
+  }
+
+  _play(song, author) {
     this.player.on('end', (data) => {
       if (data.reason === 'REPLACED') return
-      if (this.repeat.enable) {
-        return this.player.play(this.repeat.track)
-      } else {
-        const queue = this.queue.shift()
-        if (!queue) return this.emit('playEnd')
-        this.player.play(queue.track)
-        this.repeat.track
-        this.np = queue.info
-      }
+      if (this.repeat.enable) return this.player.play(this.repeat.track.track, this.repeat.track.requestedBy)
+
+      let queue = this.queue.shift()
+      if (!queue) return this.emit('playEnd')
+      this.player.play(queue.track, queue.requestedBy)
+      this.repeat.track = queue
+      this.np = Object.assign(queue.info, queue.requestedBy)
+      return
     })
 
     this.player.play(song.track)
-    this.np = song.info
     this.repeat.track = song.track
+    this.np = Object.assign(song.info, { requestedBy: author })
     return this.emit('playNow', song)
   }
 }

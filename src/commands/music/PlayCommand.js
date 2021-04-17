@@ -3,20 +3,24 @@ const { CommandListener } = require('../../utils')
 module.exports = class PlayCommand extends CommandListener {
   constructor() {
     super({
-      name: 'play'
+      name: 'play',
+      aliases: ['tocar'],
+      permissions: {
+        bot: ['voiceConnect', 'voiceSpeak']
+      }
     })
   }
 
   async run(ctx) {
-    // if (!ctx.msg.member.voiceState.sessionID) return ctx.replyT('poppy_rip', 'basic:voice.authorNotInVoiceChannel')
+    if (!ctx.msg.member.voiceState.sessionID) return ctx.replyT('poppy_rip', 'basic:voice.authorNotInVoiceChannel')
     const client = await ctx.msg.channel.guild.getRESTMember(ctx.client.user.id)
-    if (client.voiceState.sessionID && ctx.msg.member.voiceState.channelID !== client.voiceState.channelID) return ctx.replyT('poppy_rip', 'basic:voice:wrongChannel')
+    if (client.voiceState.sessionID && ctx.msg.member.voiceState.channelID !== client.voiceState.channelID) return ctx.replyT('poppy_rip', 'basic:voice.wrongChannel')
+    console.log(ctx.args)
     if (!ctx.args[0]) return ctx.replyT('poppy_rip', 'commands:play.argsNotFound')
     if (ctx.client.player.has(ctx.msg.guildID)) {
-      const song = await this.client.player.get(ctx.msg.guildID).play(ctx.args.join(' '))
+      const song = await ctx.client.player.get(ctx.msg.guildID).play(ctx.args.join(' '), ctx.author)
       return ctx.replyT('poppy_proud', 'commands:play.addedToQueue', { data: { 0: song.title } })
     } else {
-
       const player = await ctx.client.manager.join(ctx.msg.member.voiceState.channelID)
       player.on('playNow', (song) => {
         ctx.replyT('poppy_headphone', 'commands:play.nowPlaying', { data: { 0: song.info.title } })
@@ -27,7 +31,7 @@ module.exports = class PlayCommand extends CommandListener {
         ctx.client.player.delete(ctx.msg.guildID)
       })
 
-      player.play(ctx.args.join(' '))
+      player.play(ctx.args.join(' '), ctx.author)
       ctx.client.player.set(ctx.msg.guildID, player)
     }
   }
