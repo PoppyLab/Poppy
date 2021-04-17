@@ -1,6 +1,7 @@
 const { Client } = require('eris')
 const { readdir } = require('fs')
 const { Database, LocaleLoader } = require('./utils')
+const CommandCooldown = require('./utils/commands/CommandCooldown')
 module.exports = class PoppyClient extends Client {
   constructor(token, options) {
     super(token, options)
@@ -9,6 +10,7 @@ module.exports = class PoppyClient extends Client {
     this.commands = new Map()
     this.database = new Database()
     this.locale = new LocaleLoader()
+    this.commandCooldown = new CommandCooldown()
   }
 
   connect() {
