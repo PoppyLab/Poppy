@@ -53,7 +53,7 @@ module.exports = class EmbedBUilder {
   }
 
   setImage(url) {
-    this.url = { url }
+    this.image = { url }
 
     return this
   }
