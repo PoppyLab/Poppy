@@ -10,5 +10,6 @@
     "wrongChannel": "Hey, you are not in the same voice channel who I am.",
     "emptyQueue": "Baby, the queue is empty, please, use the play command and have fun.",
     "authorNotInVoiceChannel": "Are you serious? You are not in a voice channel, I can't play anything."
-  }
+  },
+  "clickHere": "click here"
 }

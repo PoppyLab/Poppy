@@ -18,5 +18,11 @@
   },
   "stop": {
     "stoped": "Ok sweet. I'm leaving from the voice channel"
+  },
+  "nowplaying": {
+    "title": "Title",
+    "author": "Author",
+    "length": "Duration",
+    "requestedBy": "Requested By"
   }
 }
