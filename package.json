@@ -1,6 +1,6 @@
 {
   "name": "poppy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An powerful bot form Discord with too many features.",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,7 @@
     "i18next": "^19.9.0",
     "i18next-node-fs-backend": "^2.1.3",
     "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
     "mongoose": "^5.11.18"
   },
   "devDependencies": {
