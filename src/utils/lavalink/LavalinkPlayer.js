@@ -95,7 +95,7 @@ module.exports = class LavalinkPlayer extends EventEmitter {
   }
 
   _addToQueue(track, author) {
-    if (!this.player.playing && !this.player.paused) return this._play(Object.assign(track, { requestedBy: author }))
+    if (!this.player.playing && !this.player.paused) return this._play(track, author)
     return this.queue.push(Object.assign(track, { requestedBy: author }))
   }
 

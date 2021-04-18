@@ -15,10 +15,9 @@ module.exports = class PlayCommand extends CommandListener {
     if (!ctx.msg.member.voiceState.sessionID) return ctx.replyT('poppy_rip', 'basic:voice.authorNotInVoiceChannel')
     const client = await ctx.msg.channel.guild.getRESTMember(ctx.client.user.id)
     if (client.voiceState.sessionID && ctx.msg.member.voiceState.channelID !== client.voiceState.channelID) return ctx.replyT('poppy_rip', 'basic:voice.wrongChannel')
-    console.log(ctx.args)
     if (!ctx.args[0]) return ctx.replyT('poppy_rip', 'commands:play.argsNotFound')
     if (ctx.client.player.has(ctx.msg.guildID)) {
-      const song = await ctx.client.player.get(ctx.msg.guildID).play(ctx.args.join(' '), ctx.author)
+      const song = await ctx.client.player.get(ctx.msg.guildID).play(ctx.args.join(' '), ctx.msg.author)
       return ctx.replyT('poppy_proud', 'commands:play.addedToQueue', { data: { 0: song.title } })
     } else {
       const player = await ctx.client.manager.join(ctx.msg.member.voiceState.channelID)
@@ -31,7 +30,7 @@ module.exports = class PlayCommand extends CommandListener {
         ctx.client.player.delete(ctx.msg.guildID)
       })
 
-      player.play(ctx.args.join(' '), ctx.author)
+      player.play(ctx.args.join(' '), ctx.msg.author)
       ctx.client.player.set(ctx.msg.guildID, player)
     }
   }
