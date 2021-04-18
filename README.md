@@ -27,7 +27,7 @@ DISCORDBOTS_TOKEN=
 ```
 - Before you create the file, go to this directory /src/utils/lavalink and put this:
 ```js
-module.exports  = [
+module.exports = [
   {
     id: '1',
     host: '0.0.0.0',
