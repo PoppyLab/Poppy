@@ -7,10 +7,11 @@ module.exports = {
 
     log.success('I\'m ready to make someone happy!')
     const status = [
-      { name: 'Gacha Club with the boss Neon', type: 5 },
+      { name: 'Gacha Club on Neon\'s boss battle', type: 5 },
       { name: 'Gacha Club', type: 0 },
       { name: 'Drawing a anime neko girl', type: 1, url: 'https://twitch.tv/DanielaGC_' },
-      { name: 'Can I be your Star', type: 2 }
+      { name: 'Can I be your Star', type: 2 },
+      { name: 'with Luni', type: 0 }
     ]
 
     setInterval(() => client.editStatus('idle', status[Math.floor(Math.random() * status.length)]), 15000)
