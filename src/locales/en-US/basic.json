@@ -11,5 +11,6 @@
     "emptyQueue": "Baby, the queue is empty, please, use the play command and have fun.",
     "authorNotInVoiceChannel": "Are you serious? You are not in a voice channel, I can't play anything."
   },
-  "clickHere": "click here"
+  "clickHere": "click here",
+  "badNickname": "Hey! What are you think? I will not run any command before someone change my nickname to something better. I have fellings, ok? You will like if I call you mother like this?"
 }

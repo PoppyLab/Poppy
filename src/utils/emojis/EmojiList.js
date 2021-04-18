@@ -4,5 +4,6 @@ module.exports = {
   poppy_rip: '<:poppy_rip:830536105409511445>',
   poppy_proud: '<:poppy_proud:830536249600245800>',
   satellite: '📡',
-  poppy_headphone: '<:poppy_listening:830536346891321385>'
+  poppy_headphone: '<:poppy_listening:830536346891321385>',
+  poppy_pout: '<:poppy_pout:830536168038072400>'
 }

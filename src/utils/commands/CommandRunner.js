@@ -3,7 +3,7 @@ const i18next = require('i18next')
 const PermissionsTools = require('../Permissions')
 const CommandContext = require('./CommandContext')
 const PermissionsList = require('../PermissionsList')
-const cooldown = new Map()
+const CheckNicknameUtils = require('../CheckNicknameUtils')
 const Emoji = require('../emojis/Emojis')
 
 module.exports = class CommandRunner {
@@ -47,16 +47,20 @@ module.exports = class CommandRunner {
     if (command.config.developer && !dev.includes(this.msg.author.id)) return
     this.msg.channel.sendTyping()
 
-    
+    const check_nickname = CheckNicknameUtils.check(this.client, this.msg.channel.guild)
+    if (check_nickname) {
+      return this.msg.channel.createMessage(`${Emoji.get('poppy_pout').mention} **|** ${this.msg.author.mention} ${locale('basic:badNickname')}`)
+    }
+
     if (this.client.commandCooldown.users.get(this.msg.author.id) === undefined) {
       this.client.commandCooldown.addUser(this.msg.author.id, command.config.cooldown * 1000)
     } else {
       return ctx.replyT('poppy_rip', 'basic:cooldown', {
         data: { 0: new Date(new Date(this.client.commandCooldown.users.get(this.msg.author.id).timeSet - Date.now())).getSeconds() }
       })
-  
+
     }
-  
+
     for (let permission of command.config.permissions.user) {
       let permissionSelect = PermissionsList[permission]
       if (typeof permissionSelect === 'object') {
