@@ -4,7 +4,8 @@ module.exports = class VolumeCommand extends CommandListener {
   constructor() {
     super({
       name: 'volume',
-      aliases: ['vol']
+      aliases: ['vol'],
+      category: 'music'
     })
   }
 

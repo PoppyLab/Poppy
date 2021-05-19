@@ -6,6 +6,7 @@ module.exports = class NowPlayingCommand extends CommandListener {
     super({
       name: 'nowplaying',
       aliases: ['np'],
+      category: 'music',
       permissions: {
         bot: ['embedLinks']
       }

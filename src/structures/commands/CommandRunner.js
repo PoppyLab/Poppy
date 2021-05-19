@@ -1,9 +1,9 @@
 const { dev } = require('../../../config')
 const i18next = require('i18next')
-const PermissionsTools = require('../Permissions')
+const PermissionsTools = require('../../utils/Permissions')
 const CommandContext = require('./CommandContext')
-const PermissionsList = require('../PermissionsList')
-const CheckNicknameUtils = require('../CheckNicknameUtils')
+const PermissionsList = require('../../utils/PermissionsList')
+const CheckNicknameUtils = require('../../utils/CheckNicknameUtils')
 const Emoji = require('../emojis/Emojis')
 
 module.exports = class CommandRunner {

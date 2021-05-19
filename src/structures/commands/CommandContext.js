@@ -1,5 +1,5 @@
 const Emoji = require('../emojis/Emojis')
-const UserTools = require('../UserTools')
+const UserTools = require('../../utils/UserTools')
 module.exports = class CommandContext {
   constructor(client, msg, args, locale, database) {
     this.client = client

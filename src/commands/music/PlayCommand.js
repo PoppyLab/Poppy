@@ -5,6 +5,7 @@ module.exports = class PlayCommand extends CommandListener {
     super({
       name: 'play',
       aliases: ['tocar'],
+      category: 'music',
       permissions: {
         bot: ['voiceConnect', 'voiceSpeak']
       }

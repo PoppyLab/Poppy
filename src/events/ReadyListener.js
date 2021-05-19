@@ -1,6 +1,6 @@
 const { Logger } = require('../utils')
 const log = new Logger(true, false)
-const LavalinkManager = require('../utils/lavalink/LavalinkManager')
+const LavalinkManager = require('../structures/lavalink/LavalinkManager')
 module.exports = {
   name: 'ready',
   run: (client) => {

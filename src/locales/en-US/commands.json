@@ -24,5 +24,10 @@
     "author": "Author",
     "length": "Duration",
     "requestedBy": "Requested By"
+  },
+  "help": {
+    "misc": "Miscellaneous",
+    "music": "Music",
+    "utils": "Utils"
   }
 }

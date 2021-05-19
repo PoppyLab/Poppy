@@ -4,7 +4,8 @@ module.exports = class StopCommand extends CommandListener {
   constructor() {
     super({
       name: 'stop',
-      aliases: ['parar', 'leave', 'sair']
+      aliases: ['parar', 'leave', 'sair'],
+      category: 'music'
     })
   }
 

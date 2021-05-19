@@ -4,6 +4,7 @@ module.exports = class PingCommand extends CommandListener {
     super({
       name: 'ping',
       aliases: [],
+      category: 'misc',
       permissions: {
         user: [],
         bot: []

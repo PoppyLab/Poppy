@@ -15,7 +15,7 @@ module.exports = class LavalinkManager {
   }
 
   async connect() {
-    const { Logger } = require('../')
+    const { Logger } = require('../../utils')
     const log = new Logger(true, false)
     try {
       await this.manager.connect()

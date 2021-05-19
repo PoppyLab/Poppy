@@ -6,7 +6,7 @@ const { connect } = require('mongoose')
 module.exports = class Database {
   constructor() {
     if (process.env.MONGO_URI) {
-      const Logger = require('../Logger')
+      const Logger = require('../../utils/Logger')
       const log = new Logger(true, false)
       connect(process.env.MONGO_URI, {
         useNewUrlParser: true,

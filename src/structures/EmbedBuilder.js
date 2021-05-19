@@ -1,4 +1,4 @@
-const ColorResolver = require('./ColorResolver')
+const ColorResolver = require('../utils/ColorResolver')
 module.exports = class EmbedBUilder {
   constructor() {
     this.title = null
